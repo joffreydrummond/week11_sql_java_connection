@@ -8,8 +8,9 @@ private static Connection conn;
             System.out.println("Establishing DB connection...");
             conn = DriverManager.getConnection(connString, "root", "password");
             System.out.println("Connected to DB successfully!");
-//            selectAllThaiFoods();
+
 //            insertNewThaiFood("Tom Yum Soup", 3, false, false);
+            deleteThaiFoodByID(9);
             selectAllThaiFoods();
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
@@ -28,7 +29,6 @@ private static Connection conn;
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
             while (rs.next()) {
                 System.out.println("ID #" + rs.getInt("id") + " " + "Name: " + rs.getString("food_name") + " |" +
                         " Spicy " +
@@ -37,7 +37,6 @@ private static Connection conn;
                         "is_noodles") + " |" + " Curry Dish: " + rs.getBoolean(
                         "is_curry"));
             }
-
         } catch (SQLException throwables) {
             System.out.println("Error when running selectAllThaiFoods().");
             throwables.printStackTrace();
@@ -59,5 +58,19 @@ private static Connection conn;
             System.out.println("Error when running insertNewThaiFood().");
             throwables.printStackTrace();
         }
+    }
+
+    public static void deleteThaiFoodByID(Integer id){
+        String query = "DELETE FROM name WHERE id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Thai food deleted successfully!");
+        } catch (SQLException throwables) {
+            System.out.println("Error when running deleteThaiFoodByID()");
+            throwables.printStackTrace();
+        }
+
     }
 }
