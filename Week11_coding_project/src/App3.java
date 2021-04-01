@@ -35,7 +35,24 @@ private static Connection conn;
             }
 
         } catch (SQLException throwables) {
-            System.out.println("Error when running SelectAllThaiFoods().");
+            System.out.println("Error when running selectAllThaiFoods().");
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void insertNewThaiFood(String foodName, Integer spiceLevel, Boolean isNoodles, Boolean isCurry){
+        String query = "INSERT INTO name(food_name, spicy_level, is_noodles, is_curry) VALUES(?, ?, ?, ?)";
+        try {
+            System.out.println("Inserting new thai food into table...");
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(2, foodName);
+            ps.setInt(3, spiceLevel);
+            ps.setBoolean(4, isNoodles);
+            ps.setBoolean(5, isCurry);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("New thai food inserted successfully!");
+        } catch (SQLException throwables) {
+            System.out.println("Error when running insertNewThaiFood().");
             throwables.printStackTrace();
         }
     }
