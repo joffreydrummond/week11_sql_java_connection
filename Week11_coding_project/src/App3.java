@@ -9,7 +9,7 @@ private static Connection conn;
             conn = DriverManager.getConnection(connString, "root", "password");
             System.out.println("Connected to DB successfully!");
 //            selectAllThaiFoods();
-            insertNewThaiFood("Tom Yum Soup", 3, false, false);
+//            insertNewThaiFood("Tom Yum Soup", 3, false, false);
             selectAllThaiFoods();
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
@@ -30,7 +30,9 @@ private static Connection conn;
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println("Name: " + rs.getString("food_name") + " |" + " Spicy Level: " + rs.getString(
+                System.out.println("ID #" + rs.getInt("id") + " " + "Name: " + rs.getString("food_name") + " |" +
+                        " Spicy " +
+                        "Level: " + rs.getString(
                         "spicy_level") + " |" + " Noodle Dish: " + rs.getBoolean(
                         "is_noodles") + " |" + " Curry Dish: " + rs.getBoolean(
                         "is_curry"));
