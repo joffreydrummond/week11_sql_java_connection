@@ -12,6 +12,7 @@ private static Connection conn;
 //            insertNewThaiFood("Tom Yum Soup", 3, false, false);
             deleteThaiFoodByID(9);
             selectAllThaiFoods();
+            updateSpiceLevel(4, 4);
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
             throwables.printStackTrace();
@@ -56,6 +57,21 @@ private static Connection conn;
             System.out.println("New thai food inserted successfully!");
         } catch (SQLException throwables) {
             System.out.println("Error when running insertNewThaiFood().");
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void updateSpiceLevel(Integer spiceLevel, Integer id){
+        String query = "UPDATE name SET spice_level = ? WHERE id = ?";
+        try {
+            System.out.println("Updating record...");
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, spiceLevel);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            System.out.println("Record updated successfully!");
+        } catch (SQLException throwables) {
+            System.out.println("Error when running updateSpiceLevel()");
             throwables.printStackTrace();
         }
     }
