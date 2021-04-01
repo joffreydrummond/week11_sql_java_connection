@@ -51,7 +51,7 @@ private static Connection conn;
             ps.setInt(2, spiceLevel);
             ps.setBoolean(3, isNoodles);
             ps.setBoolean(4, isCurry);
-            ResultSet rs = ps.executeQuery();
+            ps.executeUpdate();
             System.out.println("New thai food inserted successfully!");
         } catch (SQLException throwables) {
             System.out.println("Error when running insertNewThaiFood().");
