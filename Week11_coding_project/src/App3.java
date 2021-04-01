@@ -8,6 +8,8 @@ private static Connection conn;
             System.out.println("Establishing DB connection...");
             conn = DriverManager.getConnection(connString, "root", "password");
             System.out.println("Connected to DB successfully!");
+//            selectAllThaiFoods();
+            insertNewThaiFood("Tom Yum Soup", 3, false, false);
             selectAllThaiFoods();
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
@@ -45,10 +47,10 @@ private static Connection conn;
         try {
             System.out.println("Inserting new thai food into table...");
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(2, foodName);
-            ps.setInt(3, spiceLevel);
-            ps.setBoolean(4, isNoodles);
-            ps.setBoolean(5, isCurry);
+            ps.setString(1, foodName);
+            ps.setInt(2, spiceLevel);
+            ps.setBoolean(3, isNoodles);
+            ps.setBoolean(4, isCurry);
             ResultSet rs = ps.executeQuery();
             System.out.println("New thai food inserted successfully!");
         } catch (SQLException throwables) {
