@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class App2 {
     private static Connection conn;
@@ -12,7 +13,7 @@ public class App2 {
             conn = DriverManager.getConnection(connString,"root", "password");
             System.out.println("We have connected successfully! You rock");
 //            selectAllEmployees();
-            selectEmployee(10023);
+            selectEmployee();
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
             throwables.printStackTrace();
@@ -41,11 +42,14 @@ public class App2 {
         }
     }
 
-    public static void selectEmployee(Integer employeeNum){
+    public static void selectEmployee(){
         String query = "SELECT * FROM employees WHERE emp_no = ?";
+        Scanner scanner = new Scanner(System.in);
         try {
+            System.out.println("Enter the employee number: ");
+           String employeeNum = scanner.nextLine();
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, employeeNum);
+            ps.setString(1, employeeNum);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
