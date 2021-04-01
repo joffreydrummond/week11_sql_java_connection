@@ -8,6 +8,7 @@ private static Connection conn;
             System.out.println("Establishing DB connection...");
             conn = DriverManager.getConnection(connString, "root", "password");
             System.out.println("Connected to DB successfully!");
+            selectAllThaiFoods();
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
             throwables.printStackTrace();
@@ -21,10 +22,16 @@ private static Connection conn;
     }
 
     public static void selectAllThaiFoods(){
-        String query = "SELECT * FROM thai_food_db";
+        String query = "SELECT * FROM name";
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println("Name: " + rs.getString("food_name") + " |" + " Spicy Level: " + rs.getString(
+                        "spicy_level"));
+            }
+
         } catch (SQLException throwables) {
             System.out.println("Error when running SelectAllThaiFoods().");
             throwables.printStackTrace();
