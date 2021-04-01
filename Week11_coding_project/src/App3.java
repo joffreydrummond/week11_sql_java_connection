@@ -29,7 +29,9 @@ private static Connection conn;
 
             while (rs.next()) {
                 System.out.println("Name: " + rs.getString("food_name") + " |" + " Spicy Level: " + rs.getString(
-                        "spicy_level"));
+                        "spicy_level") + " |" + " Noodle Dish: " + rs.getBoolean(
+                        "is_noodles") + " |" + " Curry Dish: " + rs.getBoolean(
+                        "is_curry"));
             }
 
         } catch (SQLException throwables) {
