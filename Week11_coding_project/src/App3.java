@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class App3 {
 private static Connection conn;
@@ -9,10 +10,12 @@ private static Connection conn;
             conn = DriverManager.getConnection(connString, "root", "password");
             System.out.println("Connected to DB successfully!");
 
-//            insertNewThaiFood("Tom Yum Soup", 3, false, false);
-            deleteThaiFoodByID(9);
+            insertNewThaiFood("Tom Yum Soup", 3, false, false);
+//            deleteThaiFoodByID(9);
             selectAllThaiFoods();
-            updateSpiceLevel(4, 4);
+            updateSpiceLevel(8, 4);
+            selectAllThaiFoods();
+
         } catch (SQLException throwables) {
             System.out.println("Error connecting to the database.");
             throwables.printStackTrace();
@@ -46,6 +49,7 @@ private static Connection conn;
 
     public static void insertNewThaiFood(String foodName, Integer spiceLevel, Boolean isNoodles, Boolean isCurry){
         String query = "INSERT INTO name(food_name, spicy_level, is_noodles, is_curry) VALUES(?, ?, ?, ?)";
+        Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Inserting new thai food into table...");
             PreparedStatement ps = conn.prepareStatement(query);
@@ -62,7 +66,7 @@ private static Connection conn;
     }
 
     public static void updateSpiceLevel(Integer spiceLevel, Integer id){
-        String query = "UPDATE name SET spice_level = ? WHERE id = ?";
+        String query = "UPDATE name SET spicy_level = ? WHERE id = ?";
         try {
             System.out.println("Updating record...");
             PreparedStatement ps = conn.prepareStatement(query);
